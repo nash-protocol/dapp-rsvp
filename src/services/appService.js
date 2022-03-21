@@ -1,11 +1,7 @@
 import axios from "axios";
 const { REACT_APP_API_ENDPOINT } = process.env;
 const apiEndpointEnv = REACT_APP_API_ENDPOINT || "http://localhost:5000"
-const plans = {
-  lite: "adc3fc283618d18d0b8f0a285a909e87",
-};
 export default {
-  APP_PLAN_LITE: plans.lite,
   getApps: async (params) => {
     return (
       (await axios.get(`${apiEndpointEnv}/api/v2/apps`, {params}))?.data ||

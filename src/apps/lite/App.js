@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import * as backend from "./build/index.main.mjs";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { getAccountInfo } from "./functions";
-import appService from "./services/appService";
-import { useReach } from "./hooks/useReach";
-import useLocalStorage from "./hooks/useLocalStorage";
+import { getAccountInfo } from "../../functions";
+import appService from "../../services/appService";
+import { useReach } from "../../hooks/useReach";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import { Spinner } from "react-bootstrap";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import "./App.css";
+import config from "./config"
 
 function App() {
   const reach = useReach();
@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     if (apps) return;
     appService
-      .getApps({ planId: appService.APP_PLAN_LITE, deleted: false })
+      .getApps({ planId: config.PLAN_ID, deleted: false })
       .then(setApps);
   }, []);
 
@@ -70,7 +70,7 @@ function App() {
 
   const handleCreation = async () => {
     setLoadingCreation(true);
-    const { info } = await appService.createApp(appService.APP_PLAN_LITE);
+    const { info } = await appService.createApp(config.PLAN_ID);
     setApps([...apps, { appId: info }]);
     setApp(info);
     setLoadingCreation(false);
