@@ -9,7 +9,9 @@ import Icon from "react-crypto-icons";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import useLocalStorage from "../hooks/useLocalStorage";
-import CasinoIcon from '@mui/icons-material/Casino';
+
+const { REACT_APP_BRAND_NAME } = process.env;
+const brandNameEnv = REACT_APP_BRAND_NAME || "lite";
 
 const ConnectButton = ({ onConnect, onDisconnect, addr, bal }) => {
   const copy = useCopy();
@@ -126,7 +128,7 @@ const ButtonAppBar = (props) => {
             </IconButton>
           )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <span onClick={() => navigate("/")}><span>LITE</span></span>
+            <span onClick={() => navigate("/")}><span>{String(brandNameEnv).toUpperCase()}</span></span>
           </Typography>
           <ConnectButton {...props} />
         </Toolbar>
